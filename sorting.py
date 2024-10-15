@@ -37,8 +37,7 @@ def bubble(input):
             if arrow >= len(input):
                 outputList.insert(0, highest)
                 break
-    for i in outputList:
-        print("[" + str(i) + "]")
+    return outputList
 
 
 #Treats the list like a deck of cards, takes the top card off the pile and slides it where it belongs in a seperate pile that is always sorted
