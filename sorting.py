@@ -7,36 +7,45 @@ def swap(location1, location2, inputList):
     x = inputList[location2]
     inputList[location2] = inputList[location1]
     inputList[location1] = x
-    return inputList
     
 
 #Goes through the list, grabs the largest number and moves it until it finds a larger number, when the end of the list is found, deposit the largest number in a seperate list
 def bubble(input):
     
+    summedInput = 0
+    for i in input:
+        summedInput += i
+
+    print(summedInput)
+
+
     outputList = []
     arrow = 0
     
     
     while (len(input) > 0):
-        highest = input[0]
+        print(outputList)
+        highest = -1
         arrow = 0
-        while (True):
-            #Sets the first element as the highest value to start
-            if arrow == 0:
-                highest = input[arrow]
-                input.pop(0)
-            #If I find a higher value
-            elif input[arrow] > highest:
-                #place the old highest in its new spot
-                input.insert(arrow, highest)
-                #set the new highest
-                highest = input[arrow + 1]
-                input.pop(arrow + 1)
+        for i in input:
+            #If I find a higher value than the stored highest
+            if i > highest:
+                highest = i
+            else:
+                swap(arrow - 1, arrow, input)
             #If I'm at the end, break out of the inner loop
             arrow += 1
-            if arrow >= len(input):
-                outputList.insert(0, highest)
-                break
+        outputList.insert(0, input[arrow - 1])
+        input.pop(arrow - 1)
+
+
+    summedOutput = 0
+    for i in input:
+        summedOutput += i
+    print(summedOutput)
+
+    print(outputList)
+
     return outputList
 
 
@@ -44,7 +53,8 @@ def bubble(input):
 def insertion(input):
     outputList = []
     arrow = 0
-    
+
+
     while (len(input) > 0):
         heldValue = input[0]
         foundASpot = False
@@ -71,11 +81,11 @@ def insertion(input):
         #If this is the first iteration
         else:
             outputList = [heldValue]
-            
+
         #Remove the item I sorted into the list
         input.pop(0)
     ##End of while
-    
+
     return outputList
 
 
@@ -83,13 +93,13 @@ def selection(input):
 
     outputList = []
     lowestLocation = 1
-    
+
     while (len(input) > 0):
         arrow = 0
         lowestLocation = 0
         
         #Iterate over the list elements
-        while arrow < len(input) - 1:   
+        for i in input:   
             
             #If this value is smaller than the previously grabbed lowest, this is the new lowest
             if (input[arrow] < input[lowestLocation]):
@@ -103,3 +113,18 @@ def selection(input):
         input.pop(0)
 
     return outputList
+
+
+randList = []
+
+for i in range(0,100,1):
+    randList.append(i)
+
+random.shuffle(randList)
+    
+randList.append(random.randint(0,99))
+
+print(randList)
+
+
+bubble(randList)
